@@ -15,6 +15,7 @@
 		3620E31628DB8BA3009F227B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31528DB8BA3009F227B /* TabBarViewController.swift */; };
 		3620E31828DB8D98009F227B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31728DB8D98009F227B /* HomeViewController.swift */; };
 		3620E31A28DB8DE9009F227B /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31928DB8DE9009F227B /* HistoryViewController.swift */; };
+		3620E31C28DB9CCF009F227B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31B28DB9CCF009F227B /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3620E31528DB8BA3009F227B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		3620E31728DB8D98009F227B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3620E31928DB8DE9009F227B /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		3620E31B28DB9CCF009F227B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		3620E31028DB8085009F227B /* View's */ = {
 			isa = PBXGroup;
 			children = (
+				3620E31B28DB9CCF009F227B /* GradientView.swift */,
 			);
 			path = "View's";
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				3620E31628DB8BA3009F227B /* TabBarViewController.swift in Sources */,
 				3620E2FC28DB7E9E009F227B /* AppDelegate.swift in Sources */,
 				3620E31A28DB8DE9009F227B /* HistoryViewController.swift in Sources */,
+				3620E31C28DB9CCF009F227B /* GradientView.swift in Sources */,
 				3620E2FE28DB7E9E009F227B /* SceneDelegate.swift in Sources */,
 				3620E31428DB80C9009F227B /* BaseViewController.swift in Sources */,
 			);

@@ -12,6 +12,5 @@ class HomeViewController: BaseViewController {
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .blue
   }
 }
