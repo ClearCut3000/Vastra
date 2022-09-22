@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		360AD6F828DCE8DA006D1A33 /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360AD6F728DCE8DA006D1A33 /* CircularButton.swift */; };
+		360AD6FB28DCEB5C006D1A33 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360AD6FA28DCEB5C006D1A33 /* LocationManager.swift */; };
 		3620E2FC28DB7E9E009F227B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E2FB28DB7E9E009F227B /* AppDelegate.swift */; };
 		3620E2FE28DB7E9E009F227B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E2FD28DB7E9E009F227B /* SceneDelegate.swift */; };
 		3620E30528DB7EA0009F227B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3620E30428DB7EA0009F227B /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		360AD6F728DCE8DA006D1A33 /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
+		360AD6FA28DCEB5C006D1A33 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3620E2F828DB7E9E009F227B /* Vastra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3620E2FB28DB7E9E009F227B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3620E2FD28DB7E9E009F227B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		360AD6F928DCEB49006D1A33 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				360AD6FA28DCEB5C006D1A33 /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		3620E2EF28DB7E9E009F227B = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		3620E2FA28DB7E9E009F227B /* Vastra */ = {
 			isa = PBXGroup;
 			children = (
+				360AD6F928DCEB49006D1A33 /* Managers */,
 				3620E31228DB8098009F227B /* ViewController's */,
 				3620E31128DB808D009F227B /* Helper's */,
 				3620E31028DB8085009F227B /* View's */,
@@ -189,6 +200,7 @@
 				3620E31C28DB9CCF009F227B /* GradientView.swift in Sources */,
 				3620E2FE28DB7E9E009F227B /* SceneDelegate.swift in Sources */,
 				3620E31428DB80C9009F227B /* BaseViewController.swift in Sources */,
+				360AD6FB28DCEB5C006D1A33 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
