@@ -51,36 +51,38 @@ class HomeViewController: BaseViewController {
 
   //MARK: - Methods
   private func setupViews() {
-
-  }
-
-  private func setupConstraints() {
     locationManager.checkLocationAuthorization()
     view.addSubview(topLabel)
     view.addSubview(mapView)
     view.addSubview(startButton)
   }
 
-  //MARK: - Actions
-  @objc private func startRunning() {
+  private func setupConstraints() {
     NSLayoutConstraint.activate([
       topLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       topLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       topLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       topLabel.heightAnchor.constraint(equalToConstant: 50)
     ])
+
     NSLayoutConstraint.activate([
-      mapView.leadingAnchor.constraint(equalTo: view.leftAnchor),
+      mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       mapView.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8),
       mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
+
     NSLayoutConstraint.activate([
       startButton.widthAnchor.constraint(equalToConstant: 100),
       startButton.heightAnchor.constraint(equalToConstant: 100),
       startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
       startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
     ])
+  }
+
+  //MARK: - Actions
+  @objc private func startRunning() {
+
   }
 }
 
