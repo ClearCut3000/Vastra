@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CircularButto: UIButton {
+final class CircularButton: UIButton {
 
   //MARK: - Properties
   var borderWidth: CGFloat = 10.0

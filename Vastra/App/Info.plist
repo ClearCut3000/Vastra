@@ -19,5 +19,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>You must provide access to your location in order to record tracks.</string>
 </dict>
 </plist>
