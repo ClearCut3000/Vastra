@@ -12,7 +12,7 @@ final class TabBarViewController: UITabBarController {
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    tabBar.tintColor = UIColor.secondaryLabel
+    tabBar.tintColor = UIColor.label
     setupViewController()
   }
   
