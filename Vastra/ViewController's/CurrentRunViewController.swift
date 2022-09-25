@@ -6,12 +6,24 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CurrentRunViewController: UIViewController {
 
   //MARK: - Properties
   private static let titleFontSize: CGFloat = 32
   private static let subtitleFontSize: CGFloat = 24
+
+  private var stattLocation: CLLocation!
+  private var endLocation: CLLocation!
+
+  private var runDistance = 0.0
+  private var timeElapsed = 0
+  private var pace = 0
+
+  private var locationManager = LocationManager()
+
+  private var timer = Timer()
 
   //MARK: - Subview's
   private lazy var topLabel: UILabel = {
@@ -151,5 +163,51 @@ class CurrentRunViewController: UIViewController {
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupViews()
+    setupConstraints()
   }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    locationManager.manager.delegate = self
+    startRunning()
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    stopRun()
+    super.viewWillDisappear(animated)
+  }
+
+  //MARK: - Methods
+  private func setupViews() {
+
+  }
+
+  private func setupConstraints() {
+
+  }
+
+  private func startRunning() {
+    locationManager.manager.startUpdatingLocation()
+    startTimer()
+  }
+
+  private func stopRun() {
+    locationManager.manager.stopUpdatingLocation()
+    stopTimer()
+  }
+
+  private func startTimer() {
+    timeLabel.text = timeElapsed.formatTimeString()
+    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+  }
+
+  private func stopTimer() {}
+
+  @objc private func updateTimer() {}
+}
+
+//MARK: -
+extension CurrentRunViewController: CLLocationManagerDelegate {
+
 }

@@ -19,6 +19,7 @@
 		3620E31828DB8D98009F227B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31728DB8D98009F227B /* HomeViewController.swift */; };
 		3620E31A28DB8DE9009F227B /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31928DB8DE9009F227B /* HistoryViewController.swift */; };
 		3620E31C28DB9CCF009F227B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620E31B28DB9CCF009F227B /* GradientView.swift */; };
+		36B29B0528E0EBBE006C2F59 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B29B0428E0EBBE006C2F59 /* Int+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3620E31728DB8D98009F227B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3620E31928DB8DE9009F227B /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		3620E31B28DB9CCF009F227B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		36B29B0428E0EBBE006C2F59 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		3620E2FA28DB7E9E009F227B /* Vastra */ = {
 			isa = PBXGroup;
 			children = (
+				36B29B0328E0EBA6006C2F59 /* Extensions */,
 				360AD6F928DCEB49006D1A33 /* Managers */,
 				3620E31228DB8098009F227B /* ViewController's */,
 				3620E31128DB808D009F227B /* Helper's */,
@@ -123,6 +126,14 @@
 				360AD6FC28DE46D8006D1A33 /* CurrentRunViewController.swift */,
 			);
 			path = "ViewController's";
+			sourceTree = "<group>";
+		};
+		36B29B0328E0EBA6006C2F59 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				36B29B0428E0EBBE006C2F59 /* Int+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 				3620E31628DB8BA3009F227B /* TabBarViewController.swift in Sources */,
 				3620E2FC28DB7E9E009F227B /* AppDelegate.swift in Sources */,
 				3620E31A28DB8DE9009F227B /* HistoryViewController.swift in Sources */,
+				36B29B0528E0EBBE006C2F59 /* Int+Extension.swift in Sources */,
 				3620E31C28DB9CCF009F227B /* GradientView.swift in Sources */,
 				360AD6FD28DE46D8006D1A33 /* CurrentRunViewController.swift in Sources */,
 				3620E2FE28DB7E9E009F227B /* SceneDelegate.swift in Sources */,
