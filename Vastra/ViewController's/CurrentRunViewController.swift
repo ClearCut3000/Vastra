@@ -180,11 +180,51 @@ class CurrentRunViewController: UIViewController {
 
   //MARK: - Methods
   private func setupViews() {
+    view.addSubview(topLabel)
+    view.addSubview(pageStackView)
+    view.addSubview(capsuleView)
+    capsuleView.addSubview(stopSliderKnob)
+    capsuleView.addSubview(sliderStop)
 
+    let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissEnd(sender:)))
+    stopSliderKnob.addGestureRecognizer(swipeGesture)
   }
 
   private func setupConstraints() {
+    NSLayoutConstraint.activate([
+      topLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      topLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      topLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      topLabel.heightAnchor.constraint(equalToConstant: 50)
+    ])
 
+    NSLayoutConstraint.activate([
+      pageStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      pageStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      pageStackView.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8)
+    ])
+
+    NSLayoutConstraint.activate([
+      capsuleView.widthAnchor.constraint(equalToConstant: 300),
+      capsuleView.heightAnchor.constraint(equalToConstant: 70),
+      capsuleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      capsuleView.topAnchor.constraint(equalTo: pageStackView.bottomAnchor, constant: 8),
+      capsuleView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+    ])
+
+    NSLayoutConstraint.activate([
+      stopSliderKnob.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: 8),
+      stopSliderKnob.centerYAnchor.constraint(equalTo: capsuleView.centerYAnchor),
+      stopSliderKnob.widthAnchor.constraint(equalToConstant: 50),
+      stopSliderKnob.heightAnchor.constraint(equalToConstant: 50)
+    ])
+
+    NSLayoutConstraint.activate([
+      sliderStop.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor),
+      sliderStop.centerYAnchor.constraint(equalTo: capsuleView.centerYAnchor),
+      sliderStop.heightAnchor.constraint(equalToConstant: 70),
+      sliderStop.widthAnchor.constraint(equalToConstant: 70)
+    ])
   }
 
   private func startRunning() {
@@ -202,12 +242,42 @@ class CurrentRunViewController: UIViewController {
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
   }
 
-  private func stopTimer() {}
+  private func stopTimer() {
+    timer.invalidate()
+    timeElapsed = 0
+  }
 
-  @objc private func updateTimer() {}
+  private func computePace(time seconds: Int, kilometers: Double) -> String {
+    pace = Int(Double(seconds) / kilometers)
+    return pace.formatTimeString()
+  }
+
+  @objc private func updateTimer() {
+    timeElapsed += 1
+    timeLabel.text = timeElapsed.formatTimeString()
+  }
+
+  @objc private func dismissEnd(sender: UIPanGestureRecognizer) {
+    let adjust: CGFloat = 35
+    let translation = sender.translation(in: view)
+
+    if sender.state == .began || sender.state == .changed {
+      if stopSliderKnob.center.x >= sliderStop.center.x {
+        stopSliderKnob.center.x = sliderStop.center.x
+        stopRun()
+        dismiss(animated: true)
+      } else if 
+    } else if sender.state == .ended && stopSliderKnob.center.x < sliderStop.center.x {
+      /// if sliderKnob center not collided with sliderStop center
+      UIView.animate(withDuration: 0.5) {
+        /// brings view back to intial value points
+        self.stopSliderKnob.center.x = self.capsuleView.bounds.minX + adjust
+      }
+    }
+  }
 }
 
-//MARK: -
+//MARK: - CLLocationManagerDelegate Protocol
 extension CurrentRunViewController: CLLocationManagerDelegate {
 
 }
