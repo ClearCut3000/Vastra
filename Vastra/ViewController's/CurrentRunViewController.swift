@@ -14,7 +14,7 @@ class CurrentRunViewController: UIViewController {
   private static let titleFontSize: CGFloat = 32
   private static let subtitleFontSize: CGFloat = 24
 
-  private var stattLocation: CLLocation!
+  private var startLocation: CLLocation!
   private var endLocation: CLLocation!
 
   private var runDistance = 0.0
@@ -262,11 +262,16 @@ class CurrentRunViewController: UIViewController {
     let translation = sender.translation(in: view)
 
     if sender.state == .began || sender.state == .changed {
-      if stopSliderKnob.center.x >= sliderStop.center.x {
+      if stopSliderKnob.center.x > sliderStop.center.x {
         stopSliderKnob.center.x = sliderStop.center.x
         stopRun()
         dismiss(animated: true)
-      } else if 
+      } else if stopSliderKnob.center.x < capsuleView.bounds.minX + adjust {
+        stopSliderKnob.center.x = capsuleView.bounds.minX + adjust
+      } else {
+        stopSliderKnob.center.x += translation.x
+      }
+      sender.setTranslation(.zero, in: view)
     } else if sender.state == .ended && stopSliderKnob.center.x < sliderStop.center.x {
       /// if sliderKnob center not collided with sliderStop center
       UIView.animate(withDuration: 0.5) {
@@ -279,5 +284,16 @@ class CurrentRunViewController: UIViewController {
 
 //MARK: - CLLocationManagerDelegate Protocol
 extension CurrentRunViewController: CLLocationManagerDelegate {
-
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if startLocation == nil {
+      startLocation = locations.first
+    } else if let location = locations.last {
+      runDistance += endLocation.distance(from: location)
+      self.distanceLabel.text = self.runDistance.meterToKilomerers().toString(places: 2)
+      if timeElapsed > 0 && runDistance > 0 {
+        paceLabel.text = computePace(time: timeElapsed, kilometers: runDistance.meterToKilomerers())
+      }
+    }
+    endLocation = locations.last
+  }
 }
