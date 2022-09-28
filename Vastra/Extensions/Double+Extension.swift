@@ -9,7 +9,7 @@ import Foundation
 
 extension Double {
   func meterToKilomerers() -> Double {
-    let meters = Measurement(value: self, unit: UnitLength.miles)
+    let meters = Measurement(value: self, unit: UnitLength.meters)
     return meters.converted(to: .kilometers).value
   }
 

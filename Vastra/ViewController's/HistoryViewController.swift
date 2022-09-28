@@ -59,9 +59,9 @@ class HistoryViewController: BaseViewController {
 
     NSLayoutConstraint.activate([
       tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      tableView.trailingAnchor.constraint(equalTo: view.leadingAnchor),
+      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       tableView.topAnchor.constraint(equalTo: topLabel.bottomAnchor),
-      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+      tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
 }

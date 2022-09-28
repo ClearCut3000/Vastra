@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class CurrentRunViewController: UIViewController {
+class CurrentRunViewController: BaseViewController {
 
   //MARK: - Properties
   private static let titleFontSize: CGFloat = 32
@@ -139,7 +139,7 @@ class CurrentRunViewController: UIViewController {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.isUserInteractionEnabled = true
-    imageView.image = UIImage(systemName: "dot.arrowtriangle.up.down.left.circle")
+    imageView.image = UIImage(systemName: "arrow.left.and.right.circle")
     imageView.tintColor = .white
     imageView.layer.borderColor = UIColor.white.cgColor
     imageView.layer.borderWidth = 5

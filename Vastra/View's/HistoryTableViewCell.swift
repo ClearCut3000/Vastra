@@ -77,6 +77,10 @@ final class HistoryTableViewCell: UITableViewCell {
   }
 
   //MARK: - Methods
+  func configure(run: Run) {
+    
+  }
+
   private func setupSubviews() {
     backgroundColor = UIColor.black.withAlphaComponent(0.1)
     contentView.addSubview(totalKilometersLabel)

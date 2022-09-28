@@ -19,7 +19,7 @@ final class TabBarViewController: UITabBarController {
   //MARK: - Methods
   private func setupViewController() {
     viewControllers = [
-      createViewControllers(for: HomeViewController(), title: "RUN", systemImage: "hare"),
+      createViewControllers(for: HomeViewController(), title: "Run", systemImage: "hare"),
       createViewControllers(for: HistoryViewController(), title: "Logs", systemImage: "clock")
     ]
   }
