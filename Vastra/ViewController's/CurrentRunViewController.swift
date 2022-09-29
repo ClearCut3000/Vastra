@@ -21,6 +21,7 @@ class CurrentRunViewController: BaseViewController {
   private var runDistance = 0.0
   private var timeElapsed = 0
   private var pace = 0
+  fileprivate var coordLocations = List<Location>()
 
   private var locationManager = LocationManager()
 
@@ -152,7 +153,8 @@ class CurrentRunViewController: BaseViewController {
   private lazy var sliderStop: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = UIImage(systemName: "stop.circle.fill")
+    imageView.image = UIImage(systemName: "stop.circle.fill",
+                              withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.white, .systemRed]))
     imageView.tintColor = .white
     imageView.layer.borderColor = UIColor.clear.withAlphaComponent(0.5).cgColor
     imageView.layer.borderWidth = 5
@@ -165,7 +167,7 @@ class CurrentRunViewController: BaseViewController {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.text = "Slide to stop"
-    label.textColor = .white
+    label.textColor = UIColor(white: 1, alpha: 1)
     label.font = label.font.withSize(Self.subtitleFontSize)
     return label
   }()
@@ -181,7 +183,8 @@ class CurrentRunViewController: BaseViewController {
     super.viewDidAppear(animated)
     locationManager.manager.delegate = self
     startRunning()
-    self.sliderView.startShimmeringAnimation()
+    sliderText.startShimmeringAnimation()
+    sliderBounceAnimation()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -198,10 +201,9 @@ class CurrentRunViewController: BaseViewController {
     sliderView.addSubview(sliderStop)
     sliderView.addSubview(sliderText)
 
-
-
     let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissEnd(sender:)))
     stopSliderKnob.addGestureRecognizer(swipeGesture)
+
   }
 
   private func setupConstraints() {
@@ -271,6 +273,20 @@ class CurrentRunViewController: BaseViewController {
     return pace.formatTimeString()
   }
 
+  private func sliderBounceAnimation() {
+    UIView.animate(withDuration: 0.5) {
+      self.stopSliderKnob.center.x += 100
+    } completion: { _ in
+      UIView.animate(withDuration: 1,
+                     delay: 0.1,
+                     usingSpringWithDamping: 0.5,
+                     initialSpringVelocity: 0.1,
+                     options: .curveEaseInOut) {
+        self.stopSliderKnob.center.x -= 100
+      } completion: { _ in }
+    }
+  }
+
   @objc private func updateTimer() {
     timeElapsed += 1
     timeLabel.text = timeElapsed.formatTimeString()
@@ -284,6 +300,10 @@ class CurrentRunViewController: BaseViewController {
       if stopSliderKnob.center.x > sliderStop.center.x {
         stopSliderKnob.center.x = sliderStop.center.x
         stopRun()
+        Run.addRunToRealm(pace: pace,
+                          distance: runDistance,
+                          duration: timeElapsed,
+                          locations: coordLocations)
         dismiss(animated: true)
       } else if stopSliderKnob.center.x < sliderView.bounds.minX + adjust {
         stopSliderKnob.center.x = sliderView.bounds.minX + adjust
@@ -308,6 +328,9 @@ extension CurrentRunViewController: CLLocationManagerDelegate {
       startLocation = locations.first
     } else if let location = locations.last {
       runDistance += endLocation.distance(from: location)
+      let newLocation = Location(latitude: Double(endLocation.coordinate.latitude),
+                                 longitude: Double(endLocation.coordinate.longitude))
+      coordLocations.insert(newLocation, at: 0)
       self.distanceLabel.text = self.runDistance.meterToKilomerers().toString(places: 2)
       if timeElapsed > 0 && runDistance > 0 {
         paceLabel.text = computePace(time: timeElapsed, kilometers: runDistance.meterToKilomerers())

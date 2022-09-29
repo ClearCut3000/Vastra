@@ -10,8 +10,8 @@ import Foundation
 extension Int {
   func formatTimeString() -> String {
     let hours = self / 3600
-    let minutes = (self / 3600) / 60
-    let seconds = (self / 3600) % 60
+    let minutes = (self % 3600) / 60
+    let seconds = (self % 3600) % 60
     if seconds < 0 {
       return "00:00:00"
     } else {

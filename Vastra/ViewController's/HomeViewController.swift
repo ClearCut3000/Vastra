@@ -18,7 +18,7 @@ class HomeViewController: BaseViewController {
     let button = CircularButton()
     button.translatesAutoresizingMaskIntoConstraints = false
     button.borderWidth = 15
-    button.borderColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+    button.borderColor = #colorLiteral(red: 0.7882352941, green: 0.768627451, blue: 0.968627451, alpha: 1)
     button.titleText = "RUN"
     button.addTarget(self, action: #selector(startRunning), for: .touchUpInside)
     return button
