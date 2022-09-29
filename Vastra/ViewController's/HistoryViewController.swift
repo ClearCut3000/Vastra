@@ -28,7 +28,6 @@ class HistoryViewController: BaseViewController {
     table.translatesAutoresizingMaskIntoConstraints = false
     table.delegate = self
     table.dataSource = self
-    table.allowsSelection = false
     table.register(HistoryTableViewCell.self, forCellReuseIdentifier: Self.reuseID)
     table.backgroundColor = .clear
     table.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -69,20 +68,26 @@ class HistoryViewController: BaseViewController {
 //MARK: - UITableViewDelegate & UITableViewDataSource Protocols
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return Run.getAllRuns()?.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reuseID) as? HistoryTableViewCell else {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reuseID) as? HistoryTableViewCell,
+          let run = Run.getAllRuns()?[indexPath.row] else {
       return UITableViewCell()
     }
-    cell.totalKilometers = Double(indexPath.row)
-    cell.totalTime = "99:99:99"
-    cell.entryDate = Date().formatted(date: .numeric, time: .omitted)
+    cell.configure(run: run)
     return cell
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let run = Run.getAllRuns()?[indexPath.row] else {
+      return
+    }
+    
   }
 }

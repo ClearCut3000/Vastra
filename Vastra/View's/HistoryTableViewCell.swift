@@ -78,7 +78,9 @@ final class HistoryTableViewCell: UITableViewCell {
 
   //MARK: - Methods
   func configure(run: Run) {
-    
+    totalKilometers = run.distance.meterToKilomerers()
+    totalTime = run.duration.formatTimeString()
+    entryDate = run.date.getDateString()
   }
 
   private func setupSubviews() {

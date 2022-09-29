@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import RealmSwift
 
 class CurrentRunViewController: BaseViewController {
 
@@ -126,7 +127,7 @@ class CurrentRunViewController: BaseViewController {
     return stackView
   }()
 
-  private lazy var capsuleView: UIView = {
+  private lazy var sliderView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -160,6 +161,15 @@ class CurrentRunViewController: BaseViewController {
     return imageView
   }()
 
+  private lazy var sliderText: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.text = "Slide to stop"
+    label.textColor = .white
+    label.font = label.font.withSize(Self.subtitleFontSize)
+    return label
+  }()
+
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -171,6 +181,7 @@ class CurrentRunViewController: BaseViewController {
     super.viewDidAppear(animated)
     locationManager.manager.delegate = self
     startRunning()
+    self.sliderView.startShimmeringAnimation()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -182,9 +193,12 @@ class CurrentRunViewController: BaseViewController {
   private func setupViews() {
     view.addSubview(topLabel)
     view.addSubview(pageStackView)
-    view.addSubview(capsuleView)
-    capsuleView.addSubview(stopSliderKnob)
-    capsuleView.addSubview(sliderStop)
+    view.addSubview(sliderView)
+    sliderView.addSubview(stopSliderKnob)
+    sliderView.addSubview(sliderStop)
+    sliderView.addSubview(sliderText)
+
+
 
     let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissEnd(sender:)))
     stopSliderKnob.addGestureRecognizer(swipeGesture)
@@ -205,25 +219,30 @@ class CurrentRunViewController: BaseViewController {
     ])
 
     NSLayoutConstraint.activate([
-      capsuleView.widthAnchor.constraint(equalToConstant: 300),
-      capsuleView.heightAnchor.constraint(equalToConstant: 70),
-      capsuleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-      capsuleView.topAnchor.constraint(equalTo: pageStackView.bottomAnchor, constant: 8),
-      capsuleView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+      sliderView.widthAnchor.constraint(equalToConstant: 300),
+      sliderView.heightAnchor.constraint(equalToConstant: 70),
+      sliderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      sliderView.topAnchor.constraint(equalTo: pageStackView.bottomAnchor, constant: 8),
+      sliderView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
     ])
 
     NSLayoutConstraint.activate([
-      stopSliderKnob.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: 8),
-      stopSliderKnob.centerYAnchor.constraint(equalTo: capsuleView.centerYAnchor),
+      stopSliderKnob.leadingAnchor.constraint(equalTo: sliderView.leadingAnchor, constant: 8),
+      stopSliderKnob.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor),
       stopSliderKnob.widthAnchor.constraint(equalToConstant: 50),
       stopSliderKnob.heightAnchor.constraint(equalToConstant: 50)
     ])
 
     NSLayoutConstraint.activate([
-      sliderStop.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor),
-      sliderStop.centerYAnchor.constraint(equalTo: capsuleView.centerYAnchor),
+      sliderStop.trailingAnchor.constraint(equalTo: sliderView.trailingAnchor),
+      sliderStop.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor),
       sliderStop.heightAnchor.constraint(equalToConstant: 70),
       sliderStop.widthAnchor.constraint(equalToConstant: 70)
+    ])
+
+    NSLayoutConstraint.activate([
+      sliderText.centerXAnchor.constraint(equalTo: sliderView.centerXAnchor),
+      sliderText.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor)
     ])
   }
 
@@ -266,8 +285,8 @@ class CurrentRunViewController: BaseViewController {
         stopSliderKnob.center.x = sliderStop.center.x
         stopRun()
         dismiss(animated: true)
-      } else if stopSliderKnob.center.x < capsuleView.bounds.minX + adjust {
-        stopSliderKnob.center.x = capsuleView.bounds.minX + adjust
+      } else if stopSliderKnob.center.x < sliderView.bounds.minX + adjust {
+        stopSliderKnob.center.x = sliderView.bounds.minX + adjust
       } else {
         stopSliderKnob.center.x += translation.x
       }
@@ -276,7 +295,7 @@ class CurrentRunViewController: BaseViewController {
       /// if sliderKnob center not collided with sliderStop center
       UIView.animate(withDuration: 0.5) {
         /// brings view back to intial value points
-        self.stopSliderKnob.center.x = self.capsuleView.bounds.minX + adjust
+        self.stopSliderKnob.center.x = self.sliderView.bounds.minX + adjust
       }
     }
   }
