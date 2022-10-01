@@ -12,7 +12,7 @@ final class HistoryTableViewCell: UITableViewCell {
   //MARK: - Properties
   var totalKilometers: Double = 0.0 {
     didSet {
-      totalKilometersLabel.text = String(format: "%0.1f", totalKilometers)
+      totalKilometersLabel.text = String(format: "%0.2f", totalKilometers)
       layoutIfNeeded()
     }
   }

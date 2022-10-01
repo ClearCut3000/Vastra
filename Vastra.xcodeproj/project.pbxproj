@@ -29,6 +29,7 @@
 		36B29B1528E4E19D006C2F59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B29B1428E4E19D006C2F59 /* Constants.swift */; };
 		36B29B1728E6178C006C2F59 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B29B1628E6178C006C2F59 /* Date+Extension.swift */; };
 		36B29B1928E624F1006C2F59 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B29B1828E624F1006C2F59 /* View+Extension.swift */; };
+		36B29B1B28E8DF61006C2F59 /* RunDetailViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B29B1A28E8DF61006C2F59 /* RunDetailViewControler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		36B29B1428E4E19D006C2F59 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		36B29B1628E6178C006C2F59 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		36B29B1828E624F1006C2F59 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		36B29B1A28E8DF61006C2F59 /* RunDetailViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailViewControler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				3620E31728DB8D98009F227B /* HomeViewController.swift */,
 				3620E31928DB8DE9009F227B /* HistoryViewController.swift */,
 				360AD6FC28DE46D8006D1A33 /* CurrentRunViewController.swift */,
+				36B29B1A28E8DF61006C2F59 /* RunDetailViewControler.swift */,
 			);
 			path = "ViewController's";
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				36B29B1128E4DBC8006C2F59 /* Run.swift in Sources */,
 				3620E31A28DB8DE9009F227B /* HistoryViewController.swift in Sources */,
 				36B29B1528E4E19D006C2F59 /* Constants.swift in Sources */,
+				36B29B1B28E8DF61006C2F59 /* RunDetailViewControler.swift in Sources */,
 				36B29B1328E4DFC7006C2F59 /* Location.swift in Sources */,
 				36B29B1728E6178C006C2F59 /* Date+Extension.swift in Sources */,
 				36B29B0528E0EBBE006C2F59 /* Int+Extension.swift in Sources */,

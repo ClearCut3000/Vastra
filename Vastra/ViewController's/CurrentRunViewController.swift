@@ -32,6 +32,7 @@ class CurrentRunViewController: BaseViewController {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.text = "Running..."
+    label.textAlignment = .center
     label.font = label.font.withSize(Self.titleFontSize)
     label.textColor = .darkGray
     return label
@@ -261,6 +262,8 @@ class CurrentRunViewController: BaseViewController {
   private func startTimer() {
     timeLabel.text = timeElapsed.formatTimeString()
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    RunLoop.current.add(timer, forMode: .common)
+    timer.tolerance = 0.1
   }
 
   private func stopTimer() {
