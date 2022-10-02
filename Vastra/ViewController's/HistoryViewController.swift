@@ -42,6 +42,11 @@ class HistoryViewController: BaseViewController {
     setupConstraints()
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    tableView.reloadData()
+  }
+
   //MARK: - Methods
   private func setupViews() {
     view.addSubview(topLabel)

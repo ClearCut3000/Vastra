@@ -302,6 +302,7 @@ class CurrentRunViewController: BaseViewController {
     if sender.state == .began || sender.state == .changed {
       if stopSliderKnob.center.x > sliderStop.center.x {
         stopSliderKnob.center.x = sliderStop.center.x
+        let timeElapsed = self.timeElapsed
         stopRun()
         Run.addRunToRealm(pace: pace,
                           distance: runDistance,
