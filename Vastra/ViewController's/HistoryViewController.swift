@@ -97,4 +97,18 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     let viewController = RunDetailViewControler(run: run)
     present(viewController, animated: true, completion: nil)
   }
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      guard let run = Run.getAllRuns()?[indexPath.row] else {
+        return
+      }
+      Run.removeRunFromRealm(run: run)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+  }
 }

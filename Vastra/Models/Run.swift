@@ -54,6 +54,19 @@ final class Run: Object {
     }
   }
 
+  static func removeRunFromRealm(run: Run) {
+    Constants.realmQueue.sync {
+      do {
+        let realm = try Realm()
+        try realm.write({
+          realm.delete(run)
+        })
+      } catch {
+        debugPrint("Error deleting Run from Realm!")
+      }
+    }
+  }
+
   static func getAllRuns() -> Results<Run>? {
     do {
       let realm = try Realm()
