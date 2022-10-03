@@ -90,9 +90,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
     guard let run = Run.getAllRuns()?[indexPath.row] else {
       return
     }
-    
+    let viewController = RunDetailViewControler(run: run)
+    present(viewController, animated: true, completion: nil)
   }
 }

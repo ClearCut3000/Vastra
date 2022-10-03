@@ -38,6 +38,16 @@ final class RunDetailViewControler: BaseViewController {
     return view
   }()
 
+  private lazy var dismissButton: CircularButton = {
+    let button = CircularButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.borderWidth = 15
+    button.borderColor = #colorLiteral(red: 0.7882352941, green: 0.768627451, blue: 0.968627451, alpha: 1)
+    button.titleText = "Close"
+    button.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
+    return button
+  }()
+
   //MARK: - Init's
   init(run: Run) {
     self.run = run
@@ -64,6 +74,7 @@ final class RunDetailViewControler: BaseViewController {
   private func setupViews() {
     view.addSubview(mapView)
     view.addSubview(topHandleBackground)
+    view.addSubview(dismissButton)
     topHandleBackground.addSubview(topHandle)
   }
 
@@ -87,6 +98,13 @@ final class RunDetailViewControler: BaseViewController {
       topHandle.heightAnchor.constraint(equalToConstant: 6),
       topHandle.centerXAnchor.constraint(equalTo: topHandleBackground.centerXAnchor),
       topHandle.centerYAnchor.constraint(equalTo: topHandleBackground.centerYAnchor)
+    ])
+
+    NSLayoutConstraint.activate([
+      dismissButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+      dismissButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      dismissButton.heightAnchor.constraint(equalToConstant: 100),
+      dismissButton.widthAnchor.constraint(equalToConstant: 100)
     ])
   }
 
@@ -150,6 +168,10 @@ final class RunDetailViewControler: BaseViewController {
     }
     return (min: CLLocationCoordinate2D(latitude: minLatitude, longitude: minLongitude),
             max: CLLocationCoordinate2D(latitude: maxLatitude, longitude: maxLongitude))
+  }
+
+  @objc private func closeVC() {
+    self.dismiss(animated: true, completion: nil)
   }
 }
 
